@@ -1,4 +1,4 @@
-import React, { useCallback, useState } from 'react'
+import React, { useState, useEffect } from 'react'
 
 import { Task } from 'app/types/Task'
 
@@ -10,6 +10,10 @@ export const TaskItemView: React.FC<{
   task: Task
 }> = ({ task }) => {
   const [isCompleted, setCompleted] = useState(() => (task?.completed ? true : false))
+
+  useEffect(() => {
+    setCompleted(task.completed || false)
+  }, [task.completed])
 
   return (
     <Pressable onPress={() => setCompleted(!isCompleted)}>
